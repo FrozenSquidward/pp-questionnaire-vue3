@@ -2025,8 +2025,9 @@ function saveCheckbox(quItemBody,callback){
 			type:'post',
 			success:function(msg){
 				//alert(msg);// resultJson quItemId
-				if(msg!="error"){
-					var jsons=eval("("+msg+")");
+				if(msg){
+					//var jsons=eval("("+msg+")");
+					var jsons = msg;
 					//alert(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);
