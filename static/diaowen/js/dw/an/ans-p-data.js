@@ -1,4 +1,5 @@
 function querySurveyAll(callback) {
+  let token = $.cookie('BingFeng-Token');
   var ctx = $("#ctx").val();
   var sid = $("#sid").val();
   var surveyId = $("#id").val();
@@ -7,17 +8,21 @@ function querySurveyAll(callback) {
   var url=ctx+"/response/survey.do";
   if(tag==="p" || tag==="s"){
     var ctxApp = $("#ctxApp").val();
-    url = ctxApp+"/design/survey-design/surveyAll.do";
+    // url = ctxApp+"/design/survey-design/surveyAll.do";
+    url = ctxApp+"/pp/question/surveyAll";
   }
   var data = "surveyId="+surveyId+"&sid="+sid;
   $.ajax({
     url:url,
+    headers: {
+      "Authorization": "Bearer "+ token +""
+    },
     data:data,
-    //type:"post",
+    type:"get",
     cache: false,
     success:function(httpResult){
       // console.debug(httpResult);
-      if(httpResult.resultCode==200){
+      if(httpResult.code===200){
         var resultData = httpResult.data;
         parseSurvey(resultData,tag);
         var questions = resultData.questions;
@@ -48,7 +53,8 @@ function querySurveyAll(callback) {
           });
           parseSubmit(pageNo);
         }
-        $(".mobileAnswerQR").attr("src",ctx+"/response/answerTD.do?surveyId="+resultData.id);
+        // todo 二维码
+        //$(".mobileAnswerQR").attr("src",ctx+"/response/answerTD.do?surveyId="+resultData.id);
         if(callback!=null){
           callback();
         }
@@ -180,7 +186,6 @@ function parseRadio(item,pageNo){
   }else if(item.hv==1){
     //一排
   }*/
-
   if(item.hv===4){
     var quRadioItemHtml=$("#quRadioItem_default").html();
     var radioSelectOption = $("#radioSelectOption").html();
@@ -203,6 +208,7 @@ function parseRadio(item,pageNo){
       dwQuOptionItemNoteLast.attr("text_"+inputName+"_"+item_2.id);
     });
   }else{
+    console.log(2)
     var quRadioItemHtml=$("#quRadioItem_default").html();
     quCoItem.append("<ul></ul>");
     var quCoItemUl = quCoItem.find("ul");

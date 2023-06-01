@@ -1,4 +1,5 @@
 function querySurveyAll(callback) {
+  let token = $.cookie('BingFeng-Token');
   var ctx = $("#ctx").val();
   var surveyId = $("#id").val();
   var sid = $("#sid").val();
@@ -6,17 +7,21 @@ function querySurveyAll(callback) {
   var url=ctx+"/response/survey.do";
   if(tag==="p" || tag==="s"){
     var ctxApp = $("#ctxApp").val();
-    url = ctxApp+"/design/survey-design/surveyAll.do";
+    // url = ctxApp+"/design/survey-design/surveyAll.do";
+    url = ctxApp+"/pp/question/surveyAll";
   }
   var data = "surveyId="+surveyId+"&sid="+sid;
   $.ajax({
     url:url,
+    headers: {
+      "Authorization": "Bearer "+ token +""
+    },
     data:data,
-    // type:"post",
+    type:"get",
     cache: false,
     success:function(httpResult){
       // console.debug(httpResult);
-      if(httpResult.resultCode==200){
+      if(httpResult.code===200){
         var resultData = httpResult.data;
         parseSurvey(resultData,tag);
         var questions = resultData.questions;

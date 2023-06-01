@@ -2024,11 +2024,11 @@ function saveCheckbox(quItemBody,callback){
 			data:data,
 			type:'post',
 			success:function(msg){
-				//alert(msg);// resultJson quItemId
+				// console.log(msg);// resultJson quItemId
 				if(msg){
 					//var jsons=eval("("+msg+")");
 					var jsons = msg;
-					//alert(jsons);
+					// console.log(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);
 					var quItems=jsons.quItems;
@@ -2217,7 +2217,8 @@ function movePareseLastTr(nextTr){
 function saveFillblank(quItemBody,callback){
 	var saveTag=quItemBody.find("input[name='saveTag']").val();
 	if(saveTag==0){
-		var url=ctx+"/design/qu-fillblank/ajaxSave.do";
+		// var url=ctx+"/design/qu-fillblank/ajaxSave.do";
+		var url=ctx + saveurl;
 		var quType=quItemBody.find("input[name='quType']").val();
 		var quId=quItemBody.find("input[name='quId']").val();
 		var orderById=quItemBody.find("input[name='orderById']").val();;
@@ -2276,6 +2277,9 @@ function saveFillblank(quItemBody,callback){
 
 		$.ajax({
 			url:url,
+			headers: {
+				"Authorization": "Bearer "+ token +""
+			},
 			data:data,
 			type:'post',
 			success:function(msg){
@@ -2318,7 +2322,8 @@ function saveFillblank(quItemBody,callback){
 function saveScore(quItemBody,callback){
 	var saveTag=quItemBody.find("input[name='saveTag']").val();
 	if(saveTag==0){
-		var url=ctx+"/design/qu-score/ajaxSave.do";
+		// var url=ctx+"/design/qu-score/ajaxSave.do";
+		var url=ctx + saveurl;
 		var quType=quItemBody.find("input[name='quType']").val();
 		var quId=quItemBody.find("input[name='quId']").val();
 		var orderById=quItemBody.find("input[name='orderById']").val();
@@ -2386,12 +2391,15 @@ function saveScore(quItemBody,callback){
 
 		$.ajax({
 			url:url,
+			headers: {
+				"Authorization": "Bearer "+ token +""
+			},
 			data:data,
 			type:'post',
 			success:function(msg){
 				//alert(msg);// resultJson quItemId
-				if(msg!="error"){
-					var jsons=eval("("+msg+")");
+				if(msg){
+					var jsons=msg;
 					//alert(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);
@@ -2485,7 +2493,7 @@ function deleteScoreOption(){
 function saveOrderqu(quItemBody,callback){
 	var saveTag=quItemBody.find("input[name='saveTag']").val();
 	if(saveTag==0){
-		var url=ctx+"/design/qu-orderqu/ajaxSave.do";
+		var url=ctx+saveurl;
 		var quType=quItemBody.find("input[name='quType']").val();
 		var quId=quItemBody.find("input[name='quId']").val();
 		var orderById=quItemBody.find("input[name='orderById']").val();
@@ -2543,12 +2551,15 @@ function saveOrderqu(quItemBody,callback){
 
 		$.ajax({
 			url:url,
+			headers: {
+				"Authorization": "Bearer "+ token +""
+			},
 			data:data,
 			type:'post',
 			success:function(msg){
 				//alert(msg);// resultJson quItemId
-				if(msg!="error"){
-					var jsons=eval("("+msg+")");
+				if(msg){
+					var jsons = msg;
 					//alert(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);
@@ -2816,7 +2827,8 @@ function saveParagraph(quItemBody,callback){
 function saveMultiFillblank(quItemBody,callback){
 	var saveTag=quItemBody.find("input[name='saveTag']").val();
 	if(saveTag==0){
-		var url=ctx+"/design/qu-multi-fillblank/ajaxSave.do";
+		// var url=ctx+"/design/qu-multi-fillblank/ajaxSave.do";
+		var url=ctx+saveurl;
 		var quType=quItemBody.find("input[name='quType']").val();
 		var quId=quItemBody.find("input[name='quId']").val();
 		var orderById=quItemBody.find("input[name='orderById']").val();
@@ -2876,12 +2888,16 @@ function saveMultiFillblank(quItemBody,callback){
 		});
 		$.ajax({
 			url:url,
+			headers: {
+				"Authorization": "Bearer "+ token +""
+			},
 			data:data,
 			type:'post',
 			success:function(msg){
 				//alert(msg);// resultJson quItemId
-				if(msg!="error"){
-					var jsons=eval("("+msg+")");
+				if(msg){
+					// var jsons=eval("("+msg+")");
+					var jsons = msg;
 					//alert(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);

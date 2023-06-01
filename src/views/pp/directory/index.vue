@@ -88,7 +88,7 @@
             <el-button size="default" content="编辑问卷" icon="edit" @click="buttonClickA(`/static/diaowen/design.html?surveyId=${scope.row.id}`)" ></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="答卷地址" placement="top">
-            <el-button size="default" icon="share" @click="handlePush(`/dw/survey/c/url/${scope.row.id}`)"></el-button>
+            <el-button size="default" icon="share" @click="handlePush(`/pp/directory/DwAnswerUrl/${scope.row.id}`)"></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="答卷数据" placement="top">
             <el-button size="default" icon="DataLine" @click="handlePush(`/dw/survey/d/chart/${scope.row.id}`)"></el-button>
@@ -196,6 +196,9 @@ export default {
   methods: {
     buttonClickA (href) {
       window.location.href = href
+    },
+    handlePush: function (to) {
+      this.$router.push(to)
     },
     handleDialogConfirm () {
       if (this.form.id === null) {

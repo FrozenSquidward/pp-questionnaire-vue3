@@ -1,3 +1,5 @@
+let token = $.cookie('BingFeng-Token');
+
 $(document).ready(function(){
   var ctx=$("#ctx").val();
   var sid = $.getUrlParam("sid");
@@ -74,19 +76,25 @@ function bindEvent(){
 
 function loadSurveyData(callback){
   var ctx=$("#ctx").val();
+  console.log("ctx")
+  console.log(ctx)
   var surveyId = $("#id").val();
-  var url = ctx+"/survey/info.do";
+  // var url = ctx+"/survey/info.do";
+  var url = ctx+"/pp/directory/info";
   var data = "id="+surveyId;
   $.ajax({
     url:url,
+    headers: {
+      "Authorization": "Bearer "+ token +""
+    },
     data:data,
     type:"get",
     success:function(httpResult){
-      if(httpResult.resultCode==401){
+      if(httpResult.code===401){
         window.location.href="/#/login";
       }
       //surveyName
-      if(httpResult.resultCode==200){
+      if(httpResult.code===200){
         $("#surveyName").val(httpResult.data.surveyName);
       }
       if(callback!=null){
