@@ -33,7 +33,7 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="Plus" size="default" @click="handleAdd" v-hasPermi="['pp:directory:add']">新增1</el-button>
+        <el-button type="primary" plain icon="Plus" size="default" @click="handleAdd" v-hasPermi="['pp:directory:add']">新增</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -88,7 +88,7 @@
             <el-button size="default" content="编辑问卷" icon="edit" @click="buttonClickA(`/static/diaowen/design.html?surveyId=${scope.row.id}`)" ></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="答卷地址" placement="top">
-            <el-button size="default" icon="share" @click="handlePush(`/pp/directory/DwAnswerUrl/${scope.row.id}`)"></el-button>
+            <el-button size="default" icon="share" @click="handlePush(`/pp/directory/DwAnswerUrl?surveyId=${scope.row.id}`)"></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="答卷数据" placement="top">
             <el-button size="default" icon="DataLine" @click="handlePush(`/dw/survey/d/chart/${scope.row.id}`)"></el-button>

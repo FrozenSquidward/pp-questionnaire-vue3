@@ -74,7 +74,7 @@ export function dwSurveyCopy (fromSurveyId, surveyName) {
  */
 export function dwSurveyInfo (surveyId) {
   const params = {
-    id: surveyId
+    surveyId: surveyId
   }
   return request({
     url: API.surveyInfo,
@@ -82,6 +82,15 @@ export function dwSurveyInfo (surveyId) {
     params
   })
 }
+
+// 查询我的问卷详细
+/*export function dwSurveyInfo(id) {
+  console.log(dwSurveyInfo)
+  return request({
+    url: '/pp/directory/info?surveyId=' + id,
+    method: 'get'
+  })
+}*/
 /**
  * 更新问卷信息
  * @param data

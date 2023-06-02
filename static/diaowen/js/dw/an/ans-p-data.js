@@ -5,7 +5,8 @@ function querySurveyAll(callback) {
   var surveyId = $("#id").val();
   var tag = $("#tag").val();
   var prevHost = $("#prevHost").val();
-  var url=ctx+"/response/survey.do";
+  // var url=ctx+"/response/survey.do";
+  var url = ctx+"/survey/api/info";
   if(tag==="p" || tag==="s"){
     var ctxApp = $("#ctxApp").val();
     // url = ctxApp+"/design/survey-design/surveyAll.do";

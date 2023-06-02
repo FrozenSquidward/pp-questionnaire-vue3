@@ -9,8 +9,8 @@
 </template>
 <script>
 
-import DwSurveyDcsWrapper from '@/components/common/DwSurveyDcsWrapper'
-import DwAnswerUrlMain from './DwAnswerUrlMain'
+import DwSurveyDcsWrapper from '@/components/common/DwSurveyDcsWrapper';
+import DwAnswerUrlMain from './DwAnswerUrlMain';
 
 export default {
   name: 'DwAnswerUrl',

@@ -11,8 +11,8 @@
         </div>
         <el-input id="copyCodeInput" v-model="survey.answerUrl" readonly style="width: 500px;" ></el-input>
         <el-button-group>
-          <el-button type="primary" icon="el-icon-copy-document" @click="copyActiveCode($event,survey.answerUrl )" >复制地址</el-button>
-          <el-link :href="survey.answerUrl" :underline="false" target="_blank" ><el-button icon="el-icon-link" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;" >打开问卷</el-button></el-link>
+          <el-button type="primary" icon="copy-document" @click="copyActiveCode($event,survey.answerUrl )" >复制地址</el-button>
+          <el-link :href="survey.answerUrl" :underline="false" target="_blank" ><el-button icon="link" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;" >打开问卷</el-button></el-link>
         </el-button-group>
       </div>
       <div class="dw-dcs-main-content">
@@ -23,8 +23,10 @@
         </div>
         <el-input id="copyCodeInput" v-model="survey.answerUrl1" readonly style="width: 500px;" ></el-input>
         <el-button-group>
-          <el-button type="primary" icon="el-icon-copy-document" @click="copyActiveCode($event,survey.answerUrl1 )" >复制地址</el-button>
-          <el-link :href="survey.answerUrl1" :underline="false" target="_blank" ><el-button icon="el-icon-link" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;" >打开问卷</el-button></el-link>
+          <el-button type="primary" icon="copy-document" @click="copyActiveCode($event,survey.answerUrl1 )" >复制地址</el-button>
+          <el-link :href="survey.answerUrl1" :underline="false" target="_blank" >
+            <el-button icon="link" style="border-bottom-left-radius: 0;border-top-left-radius: 0;" >打开问卷</el-button>
+          </el-link>
         </el-button-group>
       </div>
     </div>
@@ -43,7 +45,7 @@
             </el-image>
           </el-col>
           <el-col :span="20">
-            <el-button type="primary" icon="el-icon-download" style="margin-left: 10px;" @click="downloadAnswerImg(`${survey.answerUrlQR}&down=1`)" >下载二维码</el-button>
+            <el-button type="primary" icon="download" style="margin-left: 10px;" @click="downloadAnswerImg(`${survey.answerUrlQR}&down=1`)" >下载二维码</el-button>
           </el-col>
         </el-row>
       </div>

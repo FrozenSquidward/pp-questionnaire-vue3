@@ -43,21 +43,25 @@ function bindEvent(){
     $(thHref).show();
     return false;
   });
-
+  /*预览-确认发布*/
   $("#confirgDevSuvey").click(function(){
     var ctx = $("#ctx").val();
     var surveyId = $("#id").val();
-    var url = ctx+"/design/survey-design/devSurvey.do";
+    // var url = ctx+"/design/survey-design/devSurvey.do";
+    var url = ctx+"/pp/question/releaset";
     var data = "surveyId="+surveyId;
     $.ajax({
       url: url,
+      headers: {
+        "Authorization": "Bearer "+ token +""
+      },
       data: data,
       type: "post",
       success: function (httpResult){
-        if(httpResult.resultCode===200){
-          window.location.href="/#/dw/survey/c/url/"+surveyId;
+        if(httpResult.code===200){
+          window.location.href="/pp/directory/DwAnswerUrl?surveyId="+surveyId;
         }else{
-          alert(httpResult.resultMsg);
+          alert(httpResult.msg);
         }
       },
       error: function(xmlHttpRequest, textStatus, errorThrown){
@@ -75,13 +79,12 @@ function bindEvent(){
 }
 
 function loadSurveyData(callback){
+  console.log("loadSurveyData")
   var ctx=$("#ctx").val();
-  console.log("ctx")
-  console.log(ctx)
   var surveyId = $("#id").val();
   // var url = ctx+"/survey/info.do";
   var url = ctx+"/pp/directory/info";
-  var data = "id="+surveyId;
+  var data = "surveyId="+surveyId;
   $.ajax({
     url:url,
     headers: {

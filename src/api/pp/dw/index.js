@@ -4,7 +4,7 @@ export default {
   logOut: `/api/dwsurvey/anon/security/logout.do`,
   /** 问卷数据  **/
   surveyList: `/api/dwsurvey/app/survey/list.do`,
-  surveyInfo: `/api/dwsurvey/app/survey/info.do`,
+  surveyInfo: `/pp/directory/info`,
   surveyUpdate: `/api/dwsurvey/app/survey/survey-base-attr.do`,
   surveyCreate: `/api/dwsurvey/app/survey/add.do`,
   surveyUpState: `/api/dwsurvey/app/survey/up-survey-status.do`,
