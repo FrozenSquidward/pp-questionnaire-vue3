@@ -50,7 +50,8 @@
   <input type="hidden" id="anClient" name="anClient" value="p">
   <input type="hidden" id="answerLoadTag" name="answerLoadTag" value="0">
   <input type="hidden" id="breakpoint1" name="breakpoint1" value="0">
-  <form id="surveyForm" action="/api/dwsurvey/anon/response/save.do" method="post" >
+<!--  <form id="surveyForm" action="/api/dwsurvey/anon/response/save.do" method="post" >-->
+  <form id="surveyForm" action="/dev-api/survey/api/submit" method="post" >
     <input type="hidden" id="surveyId" name="surveyId" value="${survey.id }">
     <input type="hidden" id="ruleCode" name="ruleCode" value="">
     <input type="hidden" id="surveyLogId" name="surveyLogId" value="${survey.surveyLogId }">

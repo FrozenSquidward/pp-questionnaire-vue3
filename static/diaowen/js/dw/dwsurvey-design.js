@@ -780,6 +780,8 @@ $(document).ready(function(){
     });
     return false;
   });
+
+  // 保存按钮
   $("#saveBtn").click(function(){
 		curEditCallback();
 		dwCommonDialogHide();
@@ -789,7 +791,8 @@ $(document).ready(function(){
 			isSaveProgress=false;
 			notify("保存成功",1000);
 		});
-	});
+  });
+
 	$("#publishBtn").click(function(){
 		curEditCallback();
 		dwCommonDialogHide();
@@ -799,6 +802,8 @@ $(document).ready(function(){
 			window.location.href="/static/diaowen/preview.html?surveyId="+questionBelongId;
 		});
 	});
+
+	// 保存方法
 	function saveSurvey(callback){
 		isSaveProgress=true;
 		var svyNmSaveTag=$("input[name='svyNmSaveTag']").val();
@@ -812,9 +817,9 @@ $(document).ready(function(){
 				var dwSurveyName=$("#dwSurveyName").html();
 				dwSurveyName=escape(encodeURIComponent(dwSurveyName));
 				data+="&svyName="+dwSurveyName;
-        var dwSurveyNameText=$("#dwSurveyName").text();
-        dwSurveyNameText=escape(encodeURIComponent(dwSurveyNameText));
-        data+="&svyNameText="+dwSurveyNameText;
+        		var dwSurveyNameText=$("#dwSurveyName").text();
+        		dwSurveyNameText=escape(encodeURIComponent(dwSurveyNameText));
+        		data+="&svyNameText="+dwSurveyNameText;
 			}
 			if(svyNoteSaveTag==="0"){
 				var dwSurveyNoteEdit=$("#dwSurveyNoteEdit").html();
@@ -878,7 +883,6 @@ function resetQuItem(){
 	});
 	var pageTags=$("#dwSurveyQuContent .surveyQuItemBody input[name='quType'][value='PAGETAG']");
 	var pageTagSize = pageTags.size() + 1;
-	console.log("pageTagSize : " + pageTagSize)
 	$.each(pageTags,function(i){
 		var quItemBody=$(this).parents(".surveyQuItemBody");
 		var pageQuContent=quItemBody.find(".pageQuContent");
@@ -988,7 +992,6 @@ function bindQuHoverItem(){
 					data:data,
 					type:"delete",
 					success:function(msg){
-						console.log("msg : " + msg)
 						if(msg){
 							quBody.hide("slow",function(){$(this).parent().remove();resetQuItem();});
 							notify("删除成功!",300);
@@ -1497,8 +1500,8 @@ function showDialog(thDialogObj){
 		$("#dwCommonDialog .optionRangeHv").hide();
 		$("#dwCommonDialog .scoreMinMax").hide();
 		$("#dwCommonDialog .minMaxLi").hide();
-    $("#dwCommonDialog .minNumLi").hide();
-    $("#dwCommonDialog .maxNumLi").hide();
+    	$("#dwCommonDialog .minNumLi").hide();
+    	$("#dwCommonDialog .maxNumLi").hide();
 		if(isRequired==1){
 			$("#dwCommonDialog input[name='setIsRequired']").prop("checked",true);
 		}
@@ -1818,7 +1821,7 @@ function saveRadio(quItemBody,callback){
 			data:data,
 			type:'post',
 			success:function(msg){
-				if(msg != "error"){
+				if(msg !== "error"){
 					// var jsons=eval("("+msg+")");//危险的写法 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/eval
 					var jsons = msg;
 					var quId=jsons.id;
@@ -1942,7 +1945,6 @@ function deleteRadioOption(){
 **/
 function saveCheckbox(quItemBody,callback){
 	var saveTag=quItemBody.find("input[name='saveTag']").val();
-	console.log("saveTag : " + saveTag)
 	if(saveTag==0){
 		var url=ctx + saveurl;
 		var quType=quItemBody.find("input[name='quType']").val();
@@ -2028,7 +2030,6 @@ function saveCheckbox(quItemBody,callback){
 				if(msg){
 					//var jsons=eval("("+msg+")");
 					var jsons = msg;
-					// console.log(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);
 					var quItems=jsons.quItems;
@@ -2284,8 +2285,9 @@ function saveFillblank(quItemBody,callback){
 			type:'post',
 			success:function(msg){
 				//alert(msg);// resultJson quItemId
-				if(msg!="error"){
-					var jsons=eval("("+msg+")");
+				if(msg!=="error"){
+					//var jsons=eval("("+msg+")");
+					var jsons = msg;
 					//alert(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);
@@ -2661,7 +2663,8 @@ function deleteOrderquOption(){
 function savePagetag(quItemBody,callback){
 	var saveTag=quItemBody.find("input[name='saveTag']").val();
 	if(saveTag==0){
-		var url=ctx+"/design/qu-pagetag/ajaxSave.do";
+		// var url=ctx+"/design/qu-pagetag/ajaxSave.do";
+		var url=ctx+saveurl;
 		var quType=quItemBody.find("input[name='quType']").val();
 		var quId=quItemBody.find("input[name='quId']").val();
 		var orderById=quItemBody.find("input[name='orderById']").val();;
@@ -2704,12 +2707,16 @@ function savePagetag(quItemBody,callback){
 
 		$.ajax({
 			url:url,
+			headers: {
+				"Authorization": "Bearer "+ token +""
+			},
 			data:data,
 			type:'post',
 			success:function(msg){
 				//alert(msg);// resultJson quItemId
-				if(msg!="error"){
-					var jsons=eval("("+msg+")");
+				if(msg!=="error"){
+					// var jsons=eval("("+msg+")");
+					var jsons= msg;
 					//alert(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);
@@ -2791,8 +2798,9 @@ function saveParagraph(quItemBody,callback){
 			type:'post',
 			success:function(msg){
 				//alert(msg);// resultJson quItemId
-				if(msg!="error"){
-					var jsons=eval("("+msg+")");
+				if(msg!=="error"){
+					var jsons=msg;
+					// var jsons=eval("("+msg+")");
 					//alert(jsons);
 					var quId=jsons.id;
 					quItemBody.find("input[name='quId']").val(quId);
@@ -3045,8 +3053,9 @@ function saveUploadFile(quItemBody,callback){
       type:'post',
       success:function(msg){
         //alert(msg);// resultJson quItemId
-        if(msg!="error"){
-          var jsons=eval("("+msg+")");
+        if(msg!=="error"){
+          // var jsons=eval("("+msg+")");
+          var jsons=msg;
           //alert(jsons);
           var quId=jsons.id;
           quItemBody.find("input[name='quId']").val(quId);

@@ -37,8 +37,6 @@ $(document).ready(function(){
 });
 
 function sww() {
-
-
   //分页设置 nextPage_a prevPage_a
   $(".nextPage_a").click(function(){
     if(validateForms()){
@@ -99,7 +97,7 @@ function sww() {
   //var prevHost="http://file.diaowen.net";
   var prevHost=$("#prevHost").val();
 
-
+  // 提交答案
   $(".submitSurvey").click(function(){
     if(validateForms()){
       var thTxt = $(this).text();
@@ -1035,7 +1033,7 @@ function validateCheck(quItemBody,isSubForm){
             validateStatus=false;
           }
         }else{
-          if(anNum<quScoreOptionTrs.size()){
+          if(anNum<quScoreOptionTrs.length){
             validateStatus=false;
           }
         }
@@ -1144,11 +1142,11 @@ function answerProgressbar(thObj){
     }
   }
 
-  var totalQuSize=$("#dwSurveyQuContent .answerTag:enabled").size();
+  var totalQuSize=$("#dwSurveyQuContent .answerTag:enabled").length;
   var answerTag1=$("#dwSurveyQuContent .answerTag[value='1']:enabled");
   var answerQuSize=0;
   if(answerTag1[0]){
-    answerQuSize=answerTag1.size();
+    answerQuSize=answerTag1.length;
   }
   var newValue = parseInt(answerQuSize/totalQuSize*100);
   $("#resultProgressRoot .progress-label").text("完成度："+newValue+"%");
