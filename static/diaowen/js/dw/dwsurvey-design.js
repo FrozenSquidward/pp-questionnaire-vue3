@@ -1915,21 +1915,24 @@ function deleteRadioOption(){
 	var quItemBody=$(curEditObj).parents(".surveyQuItemBody");
 	var hv=quItemBody.find("input[name='hv']").val();
 	var optionParent=null;
-	if(hv==3){
+	if(hv===3){
 		optionParent=$(curEditObj).parents("td");
 	}else{
 		optionParent=$(curEditObj).parents("li.quCoItemUlLi");
 	}
-	var quOptionId=$(optionParent).find("input[name='quItemId']").val();
-	if(quOptionId!="" && quOptionId!="0" ){
-		var url=ctx+"/design/qu-radio/ajaxDelete.do";
-		var data="quItemId="+quOptionId;
+	let quOptionId=$(optionParent).find("input[name='quItemId']").val();
+	if(quOptionId!=="" && quOptionId!=="0" ){
+		let url = ctx+"/pp/question/deleteOptions";
+		let data = "id="+quOptionId+"&quType=RADIO";
 		$.ajax({
 			url:url,
 			data:data,
-			type:"post",
+			headers: {
+				"Authorization": "Bearer "+ token +""
+			},
+			type:"delete",
 			success:function(msg){
-				if(msg=="true"){
+				if(msg==="true"){
 					delQuOptionCallBack(optionParent);
 				}
 			}
@@ -2147,14 +2150,14 @@ function deleteCheckboxOption(){
 }
 
 function delQuOptionCallBack(optionParent){
-	var quItemBody=$(optionParent).parents(".surveyQuItemBody");
-	var quType=quItemBody.find("input[name='quType']").val();
-	if(quType=="CHECKBOX" || quType=="RADIO"){
-		var hv=quItemBody.find("input[name='hv']").val();
-		if(hv==3){
+	let quItemBody=$(optionParent).parents(".surveyQuItemBody");
+	let quType=quItemBody.find("input[name='quType']").val();
+	if(quType==="CHECKBOX" || quType==="RADIO"){
+		let hv=quItemBody.find("input[name='hv']").val();
+		if(hv===3){
 			//emptyTd
-			var optionTr=$(optionParent).parents("tr");
-			var optionNextTr=optionTr.next();
+			let optionTr=$(optionParent).parents("tr");
+			let optionNextTr=optionTr.next();
 			if(optionNextTr[0]){
 				//则后面还有是中间选项，则删除，再依次后面的td往前移动
 				$(optionParent).remove();

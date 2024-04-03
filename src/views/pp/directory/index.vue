@@ -24,14 +24,6 @@
           <el-option label="收集结束" value="2"></el-option>
         </el-select>
       </el-form-item>
-<!--      <el-form-item label="问卷状态" prop="surveyState">
-        <el-input
-          v-model="queryParams.surveyState"
-          placeholder="请输入问卷状态"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" icon="search" size="default" @click="handleQuery">搜索</el-button>
         <el-button icon="refresh" size="default" @click="resetQuery">重置</el-button>
@@ -122,15 +114,6 @@
         v-model:limit="queryParams.pageSize"
         @pagination="getList"
     />
-<!--  这好像是VUE2的用法 -->
-<!--    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />-->
-
 
     <div>
       <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible" append-to-body width="40%" >
