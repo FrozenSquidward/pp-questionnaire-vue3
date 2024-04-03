@@ -18,13 +18,20 @@
         />
       </el-form-item>
       <el-form-item label="问卷状态" prop="surveyState">
+        <el-select v-model="queryParams.surveyState" placeholder="请选择问卷状态" @change="handleQuery">
+          <el-option label="设计中" value="0"></el-option>
+          <el-option label="收集中" value="1"></el-option>
+          <el-option label="收集结束" value="2"></el-option>
+        </el-select>
+      </el-form-item>
+<!--      <el-form-item label="问卷状态" prop="surveyState">
         <el-input
           v-model="queryParams.surveyState"
           placeholder="请输入问卷状态"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" icon="search" size="default" @click="handleQuery">搜索</el-button>
         <el-button icon="refresh" size="default" @click="resetQuery">重置</el-button>
@@ -73,7 +80,7 @@
     <el-table v-loading="loading" :data="directoryList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
 <!--      <el-table-column label="" align="center" prop="id" />-->
-      <el-table-column min-width="60%" label="问卷" align="center" prop="surveyName" />
+      <el-table-column min-width="40%" label="问卷" align="center" prop="surveyName" />
       <el-table-column min-width="25%" label="答卷数" align="center" prop="answerNum" />
       <el-table-column min-width="25%" label="状态" align="center" prop="surveyState">
         <template #default="scope">
@@ -82,6 +89,8 @@
           <el-tag v-else-if="scope.row.surveyState === 2" type="info" >收集结束</el-tag>
         </template>
       </el-table-column>
+      <el-table-column min-width="25%" label="创建时间" align="center" prop="createDate"/>
+
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-tooltip effect="dark" content="编辑问卷" placement="top">
@@ -107,12 +116,20 @@
     </el-table>
 
     <pagination
+        v-show="total > 0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
+    />
+<!--  这好像是VUE2的用法 -->
+<!--    <pagination
       v-show="total>0"
       :total="total"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
-    />
+    />-->
 
 
     <div>
